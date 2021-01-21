@@ -1,14 +1,16 @@
 
-s = '567*78*20'
-
-
-class Calculate:
+class Calculator:
 
     def __init__(self, string: str):
-        self.string = string
-        self.operators = self._reader()
-        self.stack = list(self.operators)
-        #self.result = self.calc()
+        if string != '':
+            self.string = string
+            self.stack = list(self._reader())
+            self.result = self.calculation()[0][0] #our result
+        else:
+            self.result = 0
+
+    def __str__(self):
+        return str(self.result)
 
     def _reader(self):
         num = ''
@@ -41,18 +43,38 @@ class Calculate:
 
         return stack_num, stack_ops
 
-    def calc(self):
-        ops = self.stack[1]
+
+    def _lower_calculation(self, i, oper, nums):
+        if oper[i] == '+':
+            oper.pop(i)
+            oper.append('')
+            nums[i] = nums[i] + nums[i + 1]
+            nums.pop(i + 1)
+            nums.append('')
+
+    def _higher_calculation(self, i, oper, nums):
+
+        if oper[i] == '*':
+            oper.pop(i)
+            oper.append('')
+            nums[i] = nums[i] * nums[i + 1]
+            nums.pop(i + 1)
+            nums.append('')
+
+        if oper[i] == '/':
+            oper.pop(i)
+            oper.append('')
+            nums[i] = nums[i] / nums[i + 1]
+            nums.pop(i + 1)
+            nums.append('')
+
+    def calculation(self):
+        oper = self.stack[1]
         nums = self.stack[0]
-        for i in range(len(ops)):
-            if ops[i - 1] == '*':
-                nums[i - 1] = nums[i] * nums[i - 1]
-                nums.pop(i)
-                ops.pop(i-1)
-            else:
-                pass
+        for j in range(len(oper)):
+            for i in range(len(oper)):
+                self._higher_calculation(i, oper, nums)
+        for j in range(len(oper)):
+            for i in range(len(oper)):
+                self._lower_calculation(i, oper, nums)
         return self.stack
-
-a = Calculate(s)
-
-print(a.stack)
