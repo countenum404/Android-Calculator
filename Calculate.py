@@ -1,15 +1,18 @@
-
-class Calculator:
+class Calculates:
 
     def __init__(self, string: str):
         if string != '':
             self.string = string
             self.stack = list(self._reader())
-            self.result = self.calculation()[0][0] #our result
+            self.result = str(self.calculation()[0][0]) #our result
+            if '.0' in self.result:
+                self.result = self.result.split('.')
+                self.result.pop(len(self.result) - 1)
+                self.result = self.result[0]
         else:
             self.result = 0
 
-    def __str__(self):
+    def __repr__(self):
         return str(self.result)
 
     def _reader(self):
