@@ -78,6 +78,3 @@ if __name__ == '__main__':
     calc = Calculator()
     calc.run()
 
-if __name__ == '__main__':
-    calc = Calculator()
-    calc.run()
