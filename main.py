@@ -45,7 +45,7 @@ class Calculator(App):
         ops = GridLayout(cols=2, rows=4)
         btn = GridLayout(cols=3, rows=4)
 
-        self.l = Label(text='0', font_size=52, font_name='Bahnschrift', halign='right')
+        self.l = Label(text='0', font_size=52, halign='right')
         lbl.add_widget(self.l)
         mainlayout.add_widget(lbl)
 
