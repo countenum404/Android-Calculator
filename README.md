@@ -1,4 +1,4 @@
-#Android Calculator based on the Kivy library
+# Android Calculator based on the Kivy library
 
 
 Windows screenshot:
